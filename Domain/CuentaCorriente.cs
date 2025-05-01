@@ -14,6 +14,16 @@ public class CuentaCorriente : CuentaBancaria
     {
     }
 
+    public override void Depositar(decimal monto)
+    {
+
+        ValidarOperacion(monto);
+        monto -= monto * _comision;
+        _saldo += monto;
+
+
+    }
+
     public override void Retirar(decimal monto)
     {
         ValidarOperacion(monto);

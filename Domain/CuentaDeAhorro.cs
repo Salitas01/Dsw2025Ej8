@@ -10,11 +10,19 @@ namespace Dsw2025Ej8.Domain;
 
 public class CuentaDeAhorro : CuentaBancaria
 {
-
     public CuentaDeAhorro(string numero, decimal saldo, string[] titulares) : base(numero, saldo, titulares)
     {
-    
+
     }
+
+    public override void Depositar(decimal monto)
+    {
+
+        ValidarOperacion(monto);
+        _saldo += monto;
+        AplicarInteres();
+    }
+
     public override void Retirar(decimal monto)
     {
         ValidarOperacion(monto);
@@ -26,5 +34,10 @@ public class CuentaDeAhorro : CuentaBancaria
         }
 
         _saldo -= monto;
+    }
+
+    public void AplicarInteres()
+    {
+        _saldo += _saldo * _tasaDeInteres;
     }
 }
