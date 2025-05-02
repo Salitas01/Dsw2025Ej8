@@ -9,11 +9,11 @@ namespace Dsw2025Ej8
         {
             var cuentas = new List<CuentaBancaria>();
 
-            var ca1 = new CuentaDeAhorro("CA001", 1000, new[] { "Ana" }) { _tasaDeInteres = 0.02m };
-            var ca2 = new CuentaDeAhorro("CA002", 500, new[] { "Luis" }) { _tasaDeInteres = 0.015m };
+            var ca1 = new CuentaDeAhorro("CA-001", 1000, new[] { "Ana" }) { _tasaDeInteres = 0.02m };
+            var ca2 = new CuentaDeAhorro("CA-002", 500, new[] { "Luis" }) { _tasaDeInteres = 0.015m };
 
-            var cc1 = new CuentaCorriente("CC001", 1500, new[] { "María" }) { _limiteDeDescubierto = 300 };
-            var cc2 = new CuentaCorriente("CC002", 200, new[] { "Pedro" }) { _limiteDeDescubierto = 100 };
+            var cc1 = new CuentaCorriente("CC-001", 1500, new[] { "María" }) { _limiteDeDescubierto = 300, _comision = 0.1m };
+            var cc2 = new CuentaCorriente("CC-002", 200, new[] { "Pedro" }) { _limiteDeDescubierto = 100, _comision = 0.05m };
 
             cuentas.Add(ca1);
             cuentas.Add(ca2);
@@ -46,14 +46,15 @@ namespace Dsw2025Ej8
             Console.WriteLine("\nResumen de cuentas:");
             var resumenes = cuentas.Select(c => new
             {
-                Numero = c._numero,
-                Tipo = c.GetType().Name,
-                Saldo = c._saldo
+                numero = c._numero,
+                tipo = c.GetType().Name,
+                saldo = c._saldo,
+                titular = string.Join("", c._titulares)
             });
 
             foreach (var r in resumenes)
             {
-                Console.WriteLine($"Cuenta: {r.Numero} | Tipo: {r.Tipo} | Saldo: ${r.Saldo:F2}");
+                Console.WriteLine($"Cuenta: {r.numero} | Titular: {r.titular} | Tipo: {r.tipo} | Saldo: ${r.saldo:F2}");
             }
         }
     }
